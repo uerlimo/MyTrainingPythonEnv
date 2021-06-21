@@ -1,5 +1,7 @@
-raw_time = 120
-minutes, seconds = divmod(raw_time, 60)
-hours, minutes = divmod(minutes, 60)
-
-print(f"{raw_time}s is {hours}h {minutes}m {seconds}s")
+for n in range(2,10):
+    for x in range(2,n):
+      if n % x == 0:
+          print(f"{n} equals {x} * {n//x}")
+          break
+    else:
+        print (f"{n} is a prime number.")
