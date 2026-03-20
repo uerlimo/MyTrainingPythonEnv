@@ -1,12 +1,7 @@
 // Pong Game Logic
 
-const canvas = document.createElement('canvas');
-document.body.appendChild(canvas);
+const canvas = document.getElementById('pongCanvas');
 const ctx = canvas.getContext('2d');
-
-// Set canvas dimensions
-canvas.width = 800;
-canvas.height = 400;
 
 // Paddle properties
 const paddleWidth = 10;
@@ -29,19 +24,24 @@ document.addEventListener('keyup', (event) => { keys[event.key] = false; });
 
 function draw() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
+    
     // Draw paddles
     ctx.fillStyle = 'white';
     ctx.fillRect(playerPaddle.x, playerPaddle.y, playerPaddle.width, playerPaddle.height);
     ctx.fillRect(aiPaddle.x, aiPaddle.y, aiPaddle.width, aiPaddle.height);
+    
     // Draw ball
+    ctx.fillStyle = 'white';
     ctx.beginPath();
     ctx.arc(ball.x, ball.y, ball.radius, 0, Math.PI * 2);
     ctx.fill();
     ctx.closePath();
+    
     // Draw scores
-    ctx.font = '16px Arial';
-    ctx.fillText(`Player: ${playerScore}`, 20, 20);
-    ctx.fillText(`AI: ${aiScore}`, canvas.width - 80, 20);
+    ctx.font = '20px Arial';
+    ctx.fillStyle = 'white';
+    ctx.fillText(`Player: ${playerScore}`, 20, 30);
+    ctx.fillText(`AI: ${aiScore}`, canvas.width - 120, 30);
 }
 
 function update() {
@@ -50,7 +50,7 @@ function update() {
     if (keys['ArrowDown'] && playerPaddle.y < canvas.height - paddleHeight) playerPaddle.y += playerPaddle.speed;
 
     // Move AI paddle
-aIlogic();
+    aiLogic();
 
     // Move ball
     ball.x += ball.speedX;
@@ -83,9 +83,13 @@ aIlogic();
         playerScore++;
         resetBall();
     }
+
+    // Update scoreboard
+    document.getElementById('playerScore').textContent = playerScore;
+    document.getElementById('aiScore').textContent = aiScore;
 }
 
-function aIlogic() {
+function aiLogic() {
     if (aiPaddle.y + paddleHeight / 2 < ball.y) {
         aiPaddle.y += aiPaddle.speed;
     } else {
@@ -97,7 +101,8 @@ function aIlogic() {
 function resetBall() {
     ball.x = canvas.width / 2;
     ball.y = canvas.height / 2;
-    ball.speedX = -ball.speedX;
+    ball.speedX = (Math.random() > 0.5 ? 1 : -1) * 5;
+    ball.speedY = (Math.random() - 0.5) * 5;
 }
 
 function gameLoop() {
