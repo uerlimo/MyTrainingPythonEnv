@@ -1,0 +1,31 @@
+.body {
+    background: linear-gradient(to bottom, #1e1e1e, #2a2a2a);
+}
+
+.container {
+    background-color: #333;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.scoreboard {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #444;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+.canvas {
+    border: 2px solid #fff;
+    box-shadow: 0 0 20px rgba(0, 255, 0, 0.5);
+}
+
+.instructions {
+    color: #fff;
+    font-size: 18px;
+    margin-top: 10px;
+}
